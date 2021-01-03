@@ -96,22 +96,22 @@ void loop() {
   encRgt = trunc(actual.s*(1.0-d2/r)*cpm)/cpm; //Right encoder (only quantization noise)
   measure[0].s = (encLft + encRgt) / 2.0; 
   measure[1].s = sq(1.0/cpm)/12.0;
-  measure[0].g = actual.g + NOISEDEV_ACCEL*(LONG_MAX>>1-random(LONG_MAX))/LONG_MAX; 
+  measure[0].g = actual.g + NOISEDEV_ACCEL*((LONG_MAX>>1)-random(LONG_MAX))/LONG_MAX; 
   measure[1].g = sq(NOISEDEV_ACCEL);
   measure[0].h = (encLft - encRgt) / d; 
   measure[1].h = measure[1].s / sq(d2);
-  measure[0].w = actual.w + NOISEDEV_GYRO*(LONG_MAX>>1-random(LONG_MAX))/LONG_MAX;
+  measure[0].w = actual.w + NOISEDEV_GYRO*((LONG_MAX>>1)-random(LONG_MAX))/LONG_MAX;
   measure[1].w = sq(NOISEDEV_GYRO);
 #ifdef NOISEDEV_GPS
-  measure[0].x = actual.x + NOISEDEV_GPS*(LONG_MAX>>1-random(LONG_MAX))/LONG_MAX; 
+  measure[0].x = actual.x + NOISEDEV_GPS*((LONG_MAX>>1)-random(LONG_MAX))/LONG_MAX; 
   measure[1].x = sq(NOISEDEV_GPS);
-  measure[0].y = actual.y + NOISEDEV_GPS*(LONG_MAX>>1-random(LONG_MAX))/LONG_MAX; 
+  measure[0].y = actual.y + NOISEDEV_GPS*((LONG_MAX>>1)-random(LONG_MAX))/LONG_MAX; 
   measure[1].y = sq(NOISEDEV_GPS);
 #endif  
   filter->setArray(measure[0].state,K1_SENSOR_VARIANCE); //update multiple sensors
 
   //simulate compass
-  compass = actual.h + NOISEDEV_MAGN*(LONG_MAX>>1-random(LONG_MAX))/LONG_MAX;
+  compass = actual.h + NOISEDEV_MAGN*((LONG_MAX>>1)-random(LONG_MAX))/LONG_MAX;
   if (compass>0)
     compass -= TWO_PI*trunc(compass/TWO_PI);
   else
@@ -129,7 +129,7 @@ void loop() {
   }
   filter->measure((n-c)*TWO_PI+compass, K1STATE_HEADING, 0,sq(NOISEDEV_MAGN));
     
-  filter->digest(actual.a + NOISEDEV_ACCEL*(LONG_MAX>>1-random(LONG_MAX))/LONG_MAX, K1STATE_ANGACC, 0, sq(NOISEDEV_ACCEL)); //compute angular acceleration from linear  
+  filter->digest(actual.a + NOISEDEV_ACCEL*((LONG_MAX>>1)-random(LONG_MAX))/LONG_MAX, K1STATE_ANGACC, 0, sq(NOISEDEV_ACCEL)); //compute angular acceleration from linear  
 
   filter->update(); // apply filter
   filter->getArray(recover.state);//get current state vector(array)
