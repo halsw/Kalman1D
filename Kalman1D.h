@@ -3,7 +3,7 @@
  * Usage: A template library for the implementation
  *        of one dimensional Kalman filters for arduino/teensy
  *        with asynchronous sensor fusion
- * Version 1.0
+ * Version 1.0.1
  * Developed by Evan https://github.com/halsw
  *
  * This program is free software: you can redistribute it and/or modify
