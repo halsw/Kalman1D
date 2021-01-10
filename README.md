@@ -1,4 +1,4 @@
-# One Dimension Kalman Filter for Arduino and Teensy
+# [One Dimension Kalman Filter](https://github.com/halsw/Kalman1D) for Arduino and Teensy
 A library with template classes for the 1D Kalman Filter with asynchronous sensor fusion
 
 The 1D Kalman Filter is, as the name implies, for states described by a scalar, although this library caters for arrays of 1D Kalman Filters that can be used on linear and non-linear systems.
